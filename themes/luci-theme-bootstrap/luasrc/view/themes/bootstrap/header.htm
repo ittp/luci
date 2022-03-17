@@ -19,9 +19,11 @@
 	http.prepare_content("text/html")
 -%>
 <!DOCTYPE html>
+	
 <html lang="<%=luci.i18n.context.lang%>">
 	<head>
 		<meta charset="utf-8">
+		
 		<title><%=striptags( (boardinfo.hostname or "?") .. ( (node and node.title) and ' - ' .. translate(node.title) or '')) %> - LuCI</title>
 		<meta name="viewport" content="initial-scale=1.0">
 		<link rel="stylesheet" href="<%=media%>/cascade.css">
@@ -38,12 +40,19 @@
 	</head>
 
 	<body class="lang_<%=luci.i18n.context.lang%> <% if node then %><%= striptags( node.title ) %><%- end %>" data-page="<%= pcdata(table.concat(disp.context.requestpath, "-")) %>">
+	
+		
 		<header>
 			<a class="brand" href="/"><%=striptags(boardinfo.hostname or "?")%></a>
 			<ul class="nav" id="topmenu" style="display:none"></ul>
 			<div id="indicators" class="pull-right"></div>
 		</header>
 
+			
+		<div id="subheader">
+			Subheader
+		</div>
+			
 		<div id="maincontent" class="container">
 			<%- if luci.sys.process.info("uid") == 0 and luci.sys.user.getuser("root") and not luci.sys.user.getpasswd("root") then -%>
 				<div class="alert-message warning">
@@ -63,3 +72,4 @@
 			</noscript>
 
 			<div id="tabmenu" style="display:none"></div>
+				
